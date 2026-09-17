@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import com.sandbox.sse.internal.SseService;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:5173") // Adaptez selon le port de l'app front
 public class SseController {

@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SandboxApplication kafka" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" value="kafka" />
+    <module name="spring-sandbox" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.sandbox.SandboxApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -1,13 +1,13 @@
 # Spring Sandbox
 
-Ce projet est un petit environnement de test basé sur Spring Boot pour explorer plusieurs mécanismes web et messaging :
-
-- un endpoint de santé pour vérifier que le serveur démarre correctement ;
-- un produit Kafka pour publier des messages sur un topic ;
-- un consommateur Kafka pour écouter des événements ;
-- une API SSE (Server-Sent Events) pour diffuser des notifications en temps réel.
-
+Ce projet est un petit environnement de test basé sur Spring Boot pour explorer plusieurs mécanismes.
 Le but est de servir de sandbox de démonstration et de validation rapide avant d'intégrer des fonctionnalités plus complexes dans une application Spring.
+
+- un endpoint de santé pour vérifier que le serveur démarre correctement
+- un producteur Kafka pour publier des messages sur un topic
+- un consommateur Kafka pour écouter des événements
+- une API SSE (Server-Sent Events) pour diffuser des notifications en temps réel.
+- Une architecture utilisant Spring Modulith ainsi qu'un test pour valider cette archi et générer la documentation des modules.
 
 ## Prérequis
 
@@ -22,7 +22,7 @@ Le but est de servir de sandbox de démonstration et de validation rapide avant 
 
 ## Structure principale
 
-- `com.sandbox.controller.HealthController` : endpoint `/ok`
+- `com.sandbox.health.HealthController` : endpoint `/ok`
 - `com.sandbox.kafka.KafkaController` : endpoint `/publish`
 - `com.sandbox.kafka.KafkaProducer` : envoi de messages Kafka
 - `com.sandbox.kafka.KafkaConsumer` : écoute des messages Kafka
@@ -68,8 +68,15 @@ curl "http://localhost:8080/publish?message=bonjour"
 curl -N http://localhost:8080/sse
 ```
 
+### Valider l'architecture Modulith
+
+```bash
+mvn test
+```
+
 ## Remarques
 
 - Le profil `kafka` active les composants Kafka.
 - La configuration Kafka est définie dans `src/main/resources/application.yml`.
 - Les endpoints SSE sont configurés pour accepter les requêtes depuis `http://localhost:5173`.
+- SseService écoute sur un EventListener afin que les classes du module kafka puisse communiquer de manière événementielle

@@ -1,11 +1,14 @@
-package com.sandbox.sse;
+package com.sandbox.sse.internal;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+
+import com.sandbox.sse.SseEventDTO;
 
 @Service
 public class SseService {
@@ -37,12 +40,13 @@ public class SseService {
         return kafkaEmitter;
     }
 
-    public void sendKafkaMessage(String message) {
+    @EventListener()
+    public void sendKafkaMessage(SseEventDTO event) {
         executor.execute(() -> {
             try {
                 kafkaEmitter.send(SseEmitter.event()
                                             .name("kafka")
-                                            .data(message));
+                                            .data(event.message()));
             } catch (IOException e) {
                 kafkaEmitter.completeWithError(e);
             }
